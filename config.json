@@ -1,0 +1,14 @@
+{
+    "keywords":
+    [
+        "(silica) AND (Cytotoxicity)"
+    ],
+    "journals":
+    [
+        "Toxicology in Vitro"
+    ],
+    "fpath":
+        "./test/test_googlecrawer2",
+    "chromedriver_path":
+    ""
+}
