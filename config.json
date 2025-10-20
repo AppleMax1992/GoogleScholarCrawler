@@ -1,11 +1,7 @@
 {
     "keywords":
     [
-        "(silica) AND (Cytotoxicity)"
-    ],
-    "journals":
-    [
-        "Toxicology in Vitro"
+        "(silica nanoparticles) AND (Cytotoxicity)"
     ],
     "fpath":
         "./test/test_googlecrawer2",

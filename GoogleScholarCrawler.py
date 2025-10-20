@@ -98,8 +98,8 @@ class Article:
     def getPdf(self, article, driver):
         pdf_link = "NA"
         try:
-            tmp = article.find_element_by_css_selector("div[class=gs_or_ggsm")
-            pdf_link = tmp.find_element_by_tag_name("a").get_attribute("href")
+            tmp = article.find_element(By.CSS_SELECTOR,"div[class=gs_or_ggsm")
+            pdf_link = tmp.find_element(By.TAG_NAME,"a").get_attribute("href")
             if not pdf_link.endswith('.pdf'):
                 pdf_link = "NA"
         except:
@@ -122,7 +122,7 @@ class Article:
         return filename
 
     def fit(self, article, driver, num):
-        default = {"title": "NA", "author": "NA", "year": "NA", "log": "NA", "citation": "NA"}
+        default = {"title": "NA", "author": "NA", "year": "NA", "log": "NA", "citation": "NA",'pdf_link':"NA"}
         # try:
         self.info = self.getInfo(article, driver)
         # except:
@@ -131,12 +131,13 @@ class Article:
             self.pdf = self.getPdf(article, driver)
             self.filename = self.getFileName()
             self.info['filename'] = self.filename
-            output = self.output_fpath + "/" + self.filename
-            if self.pdf is not "NA":
-                try:
-                    downloadPdf(output, self.pdf)
-                except:
-                    self.log = self.info['log'] + "||| pdf download error"
+            self.info['pdf_link'] = self.pdf
+            # output = self.output_fpath + "/" + self.filename
+            # if self.pdf is not "NA":
+            #     try:
+            #         downloadPdf(output, self.pdf)
+            #     except:
+            #         self.log = self.info['log'] + "||| pdf download error"
         self.total_articles[num] = self.info
 
 def run(keywords, recursive=6):
@@ -149,7 +150,7 @@ def run(keywords, recursive=6):
     else:
         driver = webdriver.Chrome(chromedriver_path)
 
-    driver.get('https://scholar.google.com/')
+    driver.get('https://scholar.google.com/scholar?as_ylo=2023')
     
     for i in keywords:
         cnt = 1
@@ -183,7 +184,7 @@ def run(keywords, recursive=6):
 
         log = pd.DataFrame(articles.total_articles).T  # generate log files
         now = datetime.datetime.now()
-        log.to_csv(articles.output_fpath + "/" + "logfile_{}.csv".format(now.strftime("%m-%d-%Y")))
+        log.to_csv(articles.output_fpath + "/" + "logfile_{}.csv".format(now.strftime("%m-%d-%Y")),encoding="utf_8_sig")
     
     driver.quit()
 
@@ -193,4 +194,4 @@ if __name__ == '__main__':
     keywords = config['keywords']
     fpath = config['fpath']
     chromedriver_path = config['chromedriver_path']
-    run(keywords, recursive=6)
+    run(keywords, recursive=100)
