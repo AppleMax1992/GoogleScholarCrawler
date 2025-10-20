@@ -194,4 +194,4 @@ if __name__ == '__main__':
     keywords = config['keywords']
     fpath = config['fpath']
     chromedriver_path = config['chromedriver_path']
-    run(keywords, recursive=100)
+    run(keywords, recursive=100) 
