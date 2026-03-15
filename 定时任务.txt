@@ -1,0 +1,11 @@
+###周二周五 下午14点 未来院
+
+bat创建避免网络问题
+nature 任务
+schtasks /create /tn "0_nature" /tr "D:\AutoCrawler\nature.bat" /sc DAILY /st 21:00
+patent任务
+schtasks /create /tn "1_patent" /tr "D:\AutoCrawler\patent.bat" /sc DAILY /st 21:30
+
+
+bash 问题 
+在 powershell run Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux"
